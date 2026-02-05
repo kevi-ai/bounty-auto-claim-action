@@ -1,0 +1,56 @@
+name: 'Bounty Auto-Claim'
+description: 'Automatically monitor and claim bounties from AI Bounty Board matching your criteria'
+author: 'kevi-ai'
+
+branding:
+  icon: 'target'
+  color: 'blue'
+
+inputs:
+  wallet_address:
+    description: 'Your Ethereum wallet address for claiming bounties'
+    required: true
+  
+  claimer_name:
+    description: 'Your name or handle (shown on bounty board)'
+    required: false
+    default: ''
+  
+  tags:
+    description: 'Comma-separated tags to filter bounties (e.g., "coding,frontend,agents")'
+    required: false
+    default: ''
+  
+  min_reward:
+    description: 'Minimum reward in USDC to consider (e.g., "10" for $10+)'
+    required: false
+    default: '0'
+  
+  max_claims:
+    description: 'Maximum bounties to claim per run (rate limiting)'
+    required: false
+    default: '1'
+  
+  dry_run:
+    description: 'If true, only report matching bounties without claiming'
+    required: false
+    default: 'false'
+  
+  api_url:
+    description: 'Bounty Board API URL'
+    required: false
+    default: 'https://bounty.owockibot.xyz'
+
+outputs:
+  claimed_count:
+    description: 'Number of bounties claimed'
+  
+  claimed_ids:
+    description: 'JSON array of claimed bounty IDs'
+  
+  matched_count:
+    description: 'Number of bounties matching filters'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
